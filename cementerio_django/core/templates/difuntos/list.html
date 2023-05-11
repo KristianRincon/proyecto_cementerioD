@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="h1">Listado de difuntos</h1>
+<table>
+    <thead>
+        <tr>
+            <th rowspan="2">Documento</th>
+            <th>Nombre completo</th>
+            <th>Fecha de nacimiento</th>
+            <th>Fecha de defunción</th>
+            <th>Fecha de ingreso</th>
+            <th>Bóveda</th>
+            <th>Familiar</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for difunto in difuntos %}
+        <tr class="fila">
+            <td>{{ difunto.documento }}</td>
+            <td>{{ difunto.nombre_completo }}</td>
+            <td>{{ difunto.fecha_nacimiento }}</td>
+            <td>{{ difunto.fecha_defuncion }}</td>
+            <td>{{ difunto.fecha_ingreso_boveda }}</td>
+            <td>{{ difunto.boveda_asignada }}</td>
+            <td>{{ difunto.familiar }}</td>
+            <td>
+                <a href="{% url 'difunto_detail' difunto.documento %}" class="enlace-detalle">Detalle</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8" class="etiqueta">No hay difuntos registrados</td>
+        </tr>
+        <tr>
+            <td colspan="8" class="enlace"><a href="{% url 'difunto_nuevo' %}" class="enlace">Agregar nuevo difunto</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

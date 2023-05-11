@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1 class="h1">Alquilar Bóveda</h1>
+  <p class="etiqueta">Seleccione una bóveda disponible para alquilar:</p>
+  <form method="POST">
+    {% csrf_token %}
+    {% for boveda in bovedas_disponibles %}
+      <div class="boveda">
+        <li for="{{ boveda.numero }}">Bóveda {{ boveda.numero }}, ubicada en {{ boveda.ubicacion }}</li>
+        <input type="radio" id="{{ boveda.numero }}" name="boveda_id" value="{{ boveda.numero }}" class="radio">
+      </div>
+    {% endfor %}
+    <br>
+    <div class="button-container">
+    <button type="submit" id="submit">Alquilar</button>
+    </div>
+  </form>
+{% endblock %}

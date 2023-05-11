@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="h1">Mis Bovedas alquiladas</h1>
+<ul>
+    {% for alquiler in alquileres %}
+    <li>
+        Boveda número: {{ alquiler.boveda.numero }} - Fecha de alquiler: {{ alquiler.fecha_alquiler }}
+        {% if alquiler.boveda.difunto %}
+    - Difunto: {{ alquiler.boveda.difunto.nombre_completo }}
+{% endif %}
+    </li>
+{% empty %}
+    <li>No tiene bovedas alquiladas</li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1 class="h1">Detalle de difunto</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="update">Actualizar</button>
+    <button type="submit" name="delete">Eliminar</button>
+  </form>
+  <p><a href="{% url 'difunto_list' %}" class="enlace">Volver al listado de difuntos</a></p>
+{% endblock %}

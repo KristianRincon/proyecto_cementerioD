@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="h1">Detalle de difunto</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
+<p><a href="{% url 'difunto_list' %}" class="enlace">Volver al listado de difuntos</a></p>
+
+<!-- Modal de confirmación para eliminar -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-modal-label">¿Está seguro de que desea eliminar este difunto?</h5>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'eliminar_difunto' difunto.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="confirmacion" value="True">
+                    <button type="submit" class="btn btn-danger">Sí</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+<div class="alert alert-success" role="alert">
+    {{ messages }}
+</div>
+{% endif %}
+<script>
+    // Manejador de evento para el botón "No"
+    document.querySelector('#delete-modal button.btn-secondary').addEventListener('click', function() {
+        window.location.href = "{% url 'difunto_detail' difunto.pk %}";
+    });
+</script>
+{% endblock %}

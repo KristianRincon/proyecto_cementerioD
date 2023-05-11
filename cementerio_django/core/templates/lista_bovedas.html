@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1 class="h1">Bóvedas disponibles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for boveda in bovedas %}
+                <tr>
+                    <td>{{ boveda.numero }}</td>
+                    <td>{{ boveda.ubicacion }}</td>
+                    <td>
+                        <form action="{% url 'lista_bovedas' %}" method="post">
+                            {% csrf_token %}
+                        </form>
+                    </td>
+                
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No hay bóvedas disponibles</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

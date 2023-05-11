@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1 class="h1">Ingrese los Datos Solicitados</h1>
+    <form class="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="d-flex button-container">
+            <button type="submit" id="submit" class="button-container">Registrarse</button>
+        </div>
+    </form>
+{% endblock content %}
